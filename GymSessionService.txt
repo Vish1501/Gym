@@ -1,0 +1,17 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class GymSessionService {
+
+    @Autowired
+    private GymSessionRepository gymSessionRepository;
+
+    public GymSession saveSession(GymSession gymSession) {
+        return gymSessionRepository.save(gymSession);
+    }
+
+    public GymSession findSessionById(Long id) {
+        return gymSessionRepository.findById(id).orElse(null);
+    }
+}
