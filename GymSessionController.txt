@@ -1,0 +1,15 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/session")
+public class GymSessionController {
+
+    @Autowired
+    private GymSessionService gymSessionService;
+
+    @PostMapping("/create")
+    public GymSession createSession(@RequestBody GymSession gymSession) {
+        return gymSessionService.saveSession(gymSession);
+    }
+}
