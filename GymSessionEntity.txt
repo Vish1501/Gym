@@ -1,0 +1,19 @@
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+@Entity
+public class GymSession {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String sessionType;
+    private BigDecimal sessionPrice;
+    private String sessionDescription;
+
+    @OneToOne(mappedBy = "gymSession", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Booking booking;
+
+    // Getters and Setters
+}
