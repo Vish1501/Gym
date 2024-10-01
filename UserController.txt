@@ -1,15 +1,46 @@
+// SignupController.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000") // Allow React app access
+public class SignupController {
 
     @Autowired
     private UserService userService;
 
     @PostMapping("/signup")
-    public User signup(@RequestBody User user) {
-        return userService.saveUser(user);
+    public Response signup(@RequestBody User user) {
+        // Save the user
+        userService.saveUser(user);
+        return new Response(true, "User registered successfully");
+    }
+    
+    class Response {
+        private boolean success;
+        private String message;
+        
+        // Constructor, getters, and setters
+        public Response(boolean success, String message) {
+            this.success = success;
+            this.message = message;
+        }
+
+        public boolean isSuccess() {
+            return success;
+        }
+
+        public void setSuccess(boolean success) {
+            this.success = success;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
     }
 }
